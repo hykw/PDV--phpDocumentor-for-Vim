@@ -70,7 +70,8 @@ if has ("user_commands")
 " After phpDoc standard
 let g:pdv_cfg_CommentHead = "/**"
 let g:pdv_cfg_Comment1 = " * "
-let g:pdv_cfg_Commentn = " * "
+let g:pdv_cfg_Commentn = " *"
+let g:pdv_cfg_Commentn_params = " * "
 let g:pdv_cfg_CommentTail = " */"
 let g:pdv_cfg_CommentSingle = "//"
 
@@ -280,7 +281,7 @@ func! PhpDocFunc()
     let l:txtBOL = g:pdv_cfg_BOL . l:indent
 	
     exe l:txtBOL . g:pdv_cfg_CommentHead . g:pdv_cfg_EOL
-	exe l:txtBOL . g:pdv_cfg_Comment1 . funcname . " " . g:pdv_cfg_EOL
+	exe l:txtBOL . g:pdv_cfg_Comment1 . funcname . "" . g:pdv_cfg_EOL
     exe l:txtBOL . g:pdv_cfg_Commentn . g:pdv_cfg_EOL
 
 	while (l:parameters != ",") && (l:parameters != "")
@@ -302,22 +303,22 @@ func! PhpDocFunc()
         if l:paramtype != ""
             let l:paramtype = " " . l:paramtype
         endif
-		exe l:txtBOL . g:pdv_cfg_Commentn . "@param" . l:paramtype . " $" . l:paramname . " " . g:pdv_cfg_EOL
+		exe l:txtBOL . g:pdv_cfg_Commentn_params . "@param" . l:paramtype . " $" . l:paramname . "" . g:pdv_cfg_EOL
 	endwhile
 
 	if l:static != ""
-        exe l:txtBOL . g:pdv_cfg_Commentn . "@static" . g:pdv_cfg_EOL
+        exe l:txtBOL . g:pdv_cfg_Commentn_params . "@static" . g:pdv_cfg_EOL
     endif
 	if l:abstract != ""
-        exe l:txtBOL . g:pdv_cfg_Commentn . "@abstract" . g:pdv_cfg_EOL
+        exe l:txtBOL . g:pdv_cfg_Commentn_params . "@abstract" . g:pdv_cfg_EOL
     endif
 	if l:final != ""
-        exe l:txtBOL . g:pdv_cfg_Commentn . "@final" . g:pdv_cfg_EOL
+        exe l:txtBOL . g:pdv_cfg_Commentn_params . "@final" . g:pdv_cfg_EOL
     endif
     if l:scope != ""
-    	exe l:txtBOL . g:pdv_cfg_Commentn . "@access " . l:scope . g:pdv_cfg_EOL
+    	exe l:txtBOL . g:pdv_cfg_Commentn_params . "@access " . l:scope . g:pdv_cfg_EOL
     endif
-	exe l:txtBOL . g:pdv_cfg_Commentn . "@return " . g:pdv_cfg_ReturnVal . g:pdv_cfg_EOL
+	exe l:txtBOL . g:pdv_cfg_Commentn_params . "@return " . g:pdv_cfg_ReturnVal . g:pdv_cfg_EOL
 
 	" Close the comment block.
 	exe l:txtBOL . g:pdv_cfg_CommentTail . g:pdv_cfg_EOL
